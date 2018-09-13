@@ -208,11 +208,13 @@ imguiWrapper::NewFrame(float frameDurationInSeconds) {
     io.DisplaySize = ImVec2((float)dispAttrs.FramebufferWidth, (float)dispAttrs.FramebufferHeight);
     io.DeltaTime = frameDurationInSeconds;
 
+    const auto displayRatio = Gfx::GfxSetup().HighDPI ? 2.0f : 1.0f;
+
     // transfer input
     if (Input::IsValid()) {
         if (Input::MouseAttached()) {
-            io.MousePos.x = Input::MousePosition().x;
-            io.MousePos.y = Input::MousePosition().y;
+            io.MousePos.x = Input::MousePosition().x * displayRatio;
+            io.MousePos.y = Input::MousePosition().y * displayRatio;
             io.MouseWheel = Input::MouseScroll().y;
             for (int btn = 0; btn < 3; btn++) {
                 io.MouseDown[btn] = Input::MouseButtonDown((MouseButton::Code)btn)||Input::MouseButtonPressed((MouseButton::Code)btn);
