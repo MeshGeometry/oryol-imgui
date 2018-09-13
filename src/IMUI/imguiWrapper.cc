@@ -208,7 +208,7 @@ imguiWrapper::NewFrame(float frameDurationInSeconds) {
     io.DisplaySize = ImVec2((float)dispAttrs.FramebufferWidth, (float)dispAttrs.FramebufferHeight);
     io.DeltaTime = frameDurationInSeconds;
 
-    const auto displayRatio = Gfx::GfxSetup().HighDPI ? 2.0f : 1.0f;
+    const auto displayRatio = (float) dispAttrs.FramebufferWidth / dispAttrs.WindowWidth;
 
     // transfer input
     if (Input::IsValid()) {
